@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     @php $user = auth()->user(); @endphp
                     @if($user->id == '1')
-                        <a href="create-account" style="float:right">
+                        <a href="create-account">
                             <button class="btn btn-danger">Create New Account</button>
                         </a><br><br>
 
@@ -27,34 +27,34 @@
                                         <th>Address</th>
                                         <th>Balance</th>
                                         <th>Status</th>
+                                        <th>Transactions</th>
                                     </tr>
                                 </thead>
-                                @if(count($result) > 0)
-                                    <tbody>
+                                <tbody>
+                                    @if(count($result) > 0)
                                         @foreach($result as $key => $value)
-                                        <tr>
-                                            <td>{{ ++$key }}</td>
-                                            <td>{{ $value->acc_no }}</td>
-                                            <td>{{ $value->first_name }}</td>
-                                            <td>{{ $value->last_name }}</td>
-                                            <td>{{ date('d-m-Y', strtotime($value->dob)) }}</td>
-                                            <td>{{ $value->address }}</td>
-                                            <td>{{ $value->balance }}</td>
-                                            @if($value->status == 1)
-                                                <td class="text-success">Active</td>
-                                            @else
-                                                <td class="text-danger">Inactive</td>
-                                            @endif
-                                        </tr>
+                                            <tr>
+                                                <td>{{ ++$key }}</td>
+                                                <td>{{ $value->acc_no }}</td>
+                                                <td>{{ $value->first_name }}</td>
+                                                <td>{{ $value->last_name }}</td>
+                                                <td>{{ date('d-m-Y', strtotime($value->dob)) }}</td>
+                                                <td>{{ $value->address }}</td>
+                                                <td>{{ $value->balance }}</td>
+                                                @if($value->status == 1)
+                                                    <td class="text-success">Active</td>
+                                                @else
+                                                    <td class="text-danger">Inactive</td>
+                                                @endif
+                                                <td>
+                                                    <a href="{!! route('view.account', $value->id) !!}" class="btn btn-sm btn-info" title="View">
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         @endforeach
-                                    </tbody>
-                                @else
-                                    <tbody>
-                                        <tr>
-                                            <td colspan="7">No Record Found</td>
-                                        </tr>
-                                    </tbody>
-                                @endif
+                                    @endif
+                                </tbody>
                             </table>
                         </div>
                     @else

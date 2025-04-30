@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
     })->name('create.account');
 
     Route::post('/store-account', [AccountsController::class, 'storeAccount'])->name('store.account');
+    Route::post('/view-account/transfer-amount', [AccountsController::class, 'transferAmount'])->name('transfer.amount');
+    Route::get('/view-account/{id}', [AccountsController::class, 'viewAccount'])->name('view.account');
 });
 
 require __DIR__.'/auth.php';
